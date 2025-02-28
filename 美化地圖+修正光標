@@ -23,8 +23,7 @@ char library[5][10]=// 定義地圖
 		{' ',' ',' ',' ',' ',' ',' ',' ','T','B'},
 		{'T','B','B','B','B','T','B','B','B','B'},
 	};
-	
-bool tool[5][10]=// 用來標記哪些格子是可以觸發故事的
+	bool tool[5][10]=// 用來標記哪些格子是可以觸發故事的
  	{
 		{false,true,false,false,true,false,false,false,false,true},
 		{true,false,false,false,false,false,false,false,false,true},
@@ -33,7 +32,7 @@ bool tool[5][10]=// 用來標記哪些格子是可以觸發故事的
 		{true,false,false,false,false,true,false,false,false,false},
 	};
 	
-bool walk[5][10]=// 用來標記哪些格子是可以走的
+	bool walk[5][10]=// 用來標記哪些格子是可以走的
 	{
 		{false,true,false,false,true,false,false,false,true,true},
 		{true,true,true,true,true,true,true,true,true,true},
@@ -42,13 +41,13 @@ bool walk[5][10]=// 用來標記哪些格子是可以走的
 		{true,false,false,false,false,true,false,false,false,false},
 	};
 
-void slowPrint(const string& text,int color) 
-{
+
+
+void slowPrint(const string& text,int color) {
 	 int charDelay=30;
 	 int lineDelay=1000;// 每個字 50ms，每行 1000ms
 	cout << colors.at(color);
-    for (char c : text) 
-	{
+    for (char c : text) {
         cout << c << flush;
         this_thread::sleep_for(chrono::milliseconds(charDelay)); // 逐字延遲
     }
@@ -57,10 +56,10 @@ void slowPrint(const string& text,int color)
     cout << colors.at(0);
 }
 
-void opening()
-{
+void opening(){
 	slowPrint("「頭好暈……怎麼回事？」",1);  
-    slowPrint("你從昏迷中醒來，茫然地抬起頭。四周昏暗，空氣裡瀰漫著陳舊紙張的味道。",3);
+    slowPrint("你從昏迷中醒來，茫然地抬起頭。",3);
+    slowPrint("四周昏昏暗暗，空氣裡瀰漫著陳舊紙張的味道。",3);
     cout<<endl; 
     slowPrint("「這裡是……學校的圖書館？」",1); 
     slowPrint("四下打量後，你又覺得哪裡不太對勁——某些地方，與記憶中的畫面有些偏差。",3); 
@@ -68,93 +67,86 @@ void opening()
     slowPrint("「……不管怎樣，還是先想辦法離開這裡吧。」",1); 
 }
 
+
 void story(int a, int b )//觸發道具時輸出故事情節
 {
 	if(a == 0 && b == 1 )//1
 	{
-		cout << "\n";
 		slowPrint("……這裡是圖書館管理員的辦公室，不過對方似乎不在。",3);
 		slowPrint("聽說他很常消失，所以有些人會長期逗留在這裡。",3);
 		slowPrint("希望他暫時不要回來吧，不然要解釋會很麻煩。",3);
+		
 	}
 	else if(a  ==0 && b == 4 )//2
 	{
-		cout << "\n";
 		slowPrint("一枚古玩被精心地放在展示櫃中。",3);
 		slowPrint("看起來很昂貴，還是不要亂碰好了。",3);
 	}
 	else if(a == 0 && b == 9 )//3
 	{
-		cout << "\n";
 		slowPrint("笑話大全？",3);
 		slowPrint("什麼嘛，都是些很冷的諧音梗。",3);
 		slowPrint("雖說如此，還是忍不住笑出來了，哈哈哈哈……",3);
 	}
 	else if(a == 1 && b == 0 )//4
 	{
-		cout << "\n";
 		slowPrint("一朵鳶尾花在花瓶裡靜靜綻放。",3);
 		slowPrint("真美麗啊……",3);
 		slowPrint("但現在是鳶尾花的花期嗎？",3);
 	}
 	else if(a == 2 && b == 3 )//5
 	{
-		cout << "\n";
 		slowPrint("一條銀製的繡球花手鍊。",3);
 		slowPrint("上面的痕跡不是那麼明顯，似乎常常被拿出來欣賞。",3);
 		slowPrint("感覺能從手鍊上黯淡的光芒看出主人的思念。",3);
 	}
 	else if(a == 2 && b == 6 )//6
 	{
-		cout << "\n";
 		slowPrint("好像有什麼東西竄過去了……！",3);
 		slowPrint("你湊近一瞧，是有些老舊的機械發條老鼠。",3);
 		slowPrint("伸手轉一下發條，老鼠便一溜煙地跑不見了。",3);
 	}
 	else if(a == 3 && b == 8 )//7
 	{
-		cout << "\n";
 		slowPrint("地上躺著一條帶有斑斑血跡的手帕。",3);
 		slowPrint("你思索幾下，本著好奇心想要伸手撿起。",3);
 		slowPrint("不遠處的書櫃突然出現靴子的腳步聲，你嚇得急忙收手。",3);	
 	}
 	else if(a == 4 && b == 0 )//8
 	{
-		cout << "\n";
 		slowPrint("你伸手拿起一本書，上面寫著「文藝部活動紀錄本」。",3);
 		slowPrint("印象中文藝部似乎因為人數問題快解散了？",3);
 		slowPrint("你不是很熟悉學校的社團，搖了搖頭將本子放回原位。",3);
 	}
 	else if(a == 4 && b == 5 )//9 
 	{
-		cout << "\n";
 		slowPrint("有一本書胡亂地丟在整齊的書牆上，封面寫著大大的「都鐸王朝」。",3);
 		slowPrint("你對歷史滿有興趣，但現在似乎不是悠哉看史書的時候。",3);
 	}
+		
+	
 }
+
 
 int move_updown(int cur_r, int cur_c, char c) 
 {
     switch (c) 
     {
-    	case 'w': case 'W': // 向上
-        for (int i = cur_r - 1; i >= 0; --i) 
-		{
-            if (walk[i][cur_c]) 
-			{
-                return i;
-            }
-        }
-        break;
+    case 'w': case 'W': // 向上
         
-    	case 's': case 'S': // 向下
-        for (int i = cur_r + 1; i < 5; ++i) 
-		{
-            if (walk[i][cur_c]) 
-			{
-                return i;
+            if (walk[cur_r-1][cur_c]&&cur_r-1>=0) {
+                
+                return (cur_r-1);
             }
-        }
+        
+        break;
+    case 's': case 'S': // 向下
+       
+            if (walk[cur_r+1][cur_c]&&cur_r+1<5) {
+                
+                return (cur_r+1);
+            }
+        
         break;
     }
     
@@ -166,20 +158,18 @@ int move_rightleft(int cur_r, int cur_c, char c)
     switch (c) 
     {
     case 'a': case 'A': // 向左
-        for (int i = cur_c - 1; i >= 0; --i) {
-            if (walk[cur_r][i]) {
-                return i;
+     
+            if (walk[cur_r][cur_c-1]&&cur_c-1>=0) {
+                return (cur_c-1);
             }
-        }
+        
         break;
     case 'd': case 'D': // 向右
-        for (int i = cur_c + 1; i < 10; ++i) 
-		{
-            if (walk[cur_r][i]) 
-			{
-                return i;
+       
+            if (walk[cur_r][cur_c+1]&&cur_c+1<10) {
+                return (cur_c+1);
             }
-        }
+        
         break;
     }
      return cur_c;
@@ -188,110 +178,63 @@ int move_rightleft(int cur_r, int cur_c, char c)
 void library_map(int cur_r, int cur_c)
 {
     do {
-       		cout << "\033[2J\033[1;1H";
-       		cout << "\n使用W/A/S/D控制方向"<<endl;
-			cout << "有黃色標記的位置似乎放了些神奇的東西，可以去看看！"<<endl; 
-			cout << "有紅色標記的地方似乎就是出口了！"<<endl;
-			cout << "\n\n\n";
+       cout << "\033[2J\033[1;1H";
         
-        	for (int i = 0; i < 5; ++i) 
-			{
-            for (int j = 0; j < 10; ++j) 
-			{
+        for (int i = 0; i < 5; ++i) {
+            for (int j = 0; j < 10; ++j) {
                 if (cur_r == i && cur_c == j) 
 				{ 
                     cout << "\033[46;37m" << library[i][j] << "\033[0m" <<" ";
                 } 
-                else if (i == 0 && j == 1) 
+                else if ((i == 0 && j == 1)||(i == 0 && j == 4)||(i == 0 && j == 9)|| (i == 1 && j == 0) ||(i == 2 && j == 3)  
+				||(i == 2 && j == 6)||(i == 3 && j == 8)||(i == 4 && j == 0) ||(i == 4 && j == 5)  ||(i == 1 && j == 9)  ) 
 				{ 
                     cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
                 } 
-                else if (i == 0 && j == 4) 
-				{ 
-                    cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
-                } 
-                else if (i == 0 && j == 9) 
-				{ 
-                    cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
-                } 
-                else if (i == 1 && j == 0) 
-				{ 
-                    cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
-                } 
-                else if (i == 2 && j == 3) 
-				{ 
-                    cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
-                } 
-                else if (i == 2 && j == 6) 
-				{ 
-                    cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
-                } 
-                else if (i == 3 && j == 8) 
-				{ 
-                    cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
-                } 
-                else if (i == 4 && j == 0) 
-				{ 
-                    cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
-                } 
-                else if (i == 4 && j == 5) 
-				{ 
-                    cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
-                } 
-                else if (i == 1 && j == 9) 
-				{ 
-                    cout << "\033[31m" << library[i][j] << "\033[0m" << " ";
-                } 
-				else 
-				{
-                    cout << library[i][j]<<" ";
-                }
+                
+                else cout<<library[i][j] << " ";
+                
             }
             cout << endl;  
-        	}
+        } 
         
-			if(cur_r == 1 && cur_c == 9 )//終 
-			{	
-				cout << "\n";
-				slowPrint("你印象中本該是出口的地方，卻只是一排與周圍毫無二致的巨大書櫃。",3);
-				slowPrint("……這樣看來，離開的希望大概是零了吧。",1);
-				slowPrint("無奈之下，你隨手翻起書架上的書，沒想到竟發現了一本相當奇怪的東西——",3);
-				cout << endl;
-				slowPrint("《心理測驗☆快來看看你跟起司的羈絆吧～?》",2);
-				cout << endl;
-				slowPrint("……什麼鬼？這東西看起來比 FB 垃圾廣告還蠢。",1);
-				slowPrint("但現在也沒別的事可做，於是你帶著半信半疑的心情，開始讀起書中的內容。",3);
-				break;
-			}
+	if(cur_r == 1 && cur_c == 9 )//終 
+	{
+		slowPrint("你印象中本該是出口的地方，卻只是一排與周圍毫無二致的巨大書櫃。",3);
+		slowPrint("……這樣看來，離開的希望大概是零了吧。",1);
+		slowPrint("無奈之下，你隨手翻起書架上的書，沒想到竟發現了一本相當奇怪的東西——",3);
+		cout << endl;
+		slowPrint("《心理測驗☆快來看看你跟起司的羈絆吧～?》",2);
+		cout << endl;
+		slowPrint("……什麼鬼？這東西看起來比 FB 垃圾廣告還蠢。",1);
+		slowPrint("但現在也沒別的事可做，於是你帶著半信半疑的心情，開始讀起書中的內容。",3);
+		break;
+	}
         
-			story(cur_r, cur_c);
+	story(cur_r, cur_c);
 
-    		char move;
-    		cin >> move;
+    char move;
+    cin >> move;
     
-    		if (move == 'W' || move == 'w' || move == 'S' || move == 's') 
-			{
-           		cur_r = move_updown(cur_r, cur_c, move);
-        	} 
-			else if (move == 'A' || move == 'a' || move == 'D' || move == 'd') 
-			{
-            	cur_c=move_rightleft(cur_r, cur_c, move);
-        	} 
-			else
-			{
-            	slowPrint("請輸入正確移動指令！！", 4);
-            	continue;
-        	}
+    if (move == 'W' || move == 'w' || move == 'S' || move == 's') {
+           cur_r = move_updown(cur_r, cur_c, move);
+        } 
+	else if (move == 'A' || move == 'a' || move == 'D' || move == 'd') {
+            cur_c=move_rightleft(cur_r, cur_c, move);
+        } 
+	else{
+            slowPrint("請輸入正確移動指令！！", 4);
+            continue;
+        }
      
-    	} while (true); 
+    } while (true); 
 }
 
 
-int psychologicaltest()
-{
+int psychologicaltest(){
 	char option=0;
 	
-	cout<<endl; 
+	cout << "\033[2J\033[1;1H"; 
 	slowPrint("「第一題！對於戀愛小說，你喜歡哪種類型？」",2); 
 	cout<<"a.當然是要甜甜的校園戀愛啊！"<<endl;
 	cout<<"b.破鏡難圓的劇情非常好吃……"<<endl;
@@ -299,6 +242,7 @@ int psychologicaltest()
 	while(cin>>option){
 		
 		if(option=='a'){
+			cout << "\033[2J\033[1;1H";
 			slowPrint("「第二題！你覺得人生是由什麼組成的呢？」",2); 
 			cout<<"a.未知的意外。"<<endl;
 			cout<<"b.過去的因果。"<<endl;
@@ -315,6 +259,7 @@ int psychologicaltest()
 		}
 		
 		else if(option=='b'){
+			cout << "\033[2J\033[1;1H";
 			slowPrint("「第二題！如果被丟到無人島上該怎麼辦呢？」",2); 
 			cout<<"a.確保衛生！"<<endl;
 			cout<<"b.尋找食物！"<<endl;
@@ -327,6 +272,7 @@ int psychologicaltest()
 		}
 		
 		else if(option=='c'){
+			cout << "\033[2J\033[1;1H";
 			slowPrint("「第二題！既然是自己一個人的話，那你喜歡什麼樣的生活呢？」",2); 
 			cout<<"a.刺激有趣的冒險！"<<endl;
 			cout<<"b.開心快樂的玩耍！"<<endl;
@@ -351,7 +297,9 @@ int test_text(){
 	char user_continue;
 	do{
    		character=psychologicaltest();
-    	slowPrint("「嗯嗯嗯……我已經知道最適合你的起司啦！你決定好這就是你的起司了嗎？還是要再來一遍？」",2); 
+   		cout << "\033[2J\033[1;1H";
+    	slowPrint("「嗯嗯嗯……我已經知道最適合你的起司啦！」",2); 
+    	slowPrint("「你決定好這就是你的起司了嗎？還是要再來一遍？」",2);
     	cout<<"a.決定好啦！"<<endl;
 		cout<<"b.還要再想想……"<<endl;
     	while(cin>>user_continue){
@@ -370,11 +318,14 @@ int test_text(){
 	return character;
 }
 
+
+
 void character_Bech(){
 	cout<<endl;
 	slowPrint("我中間劇情還沒寫完(尖叫)",2); 
 	slowPrint("等全部寫完我再一起放上來好了(陰暗地爬走)",2);  
 }
+
 void character_Feichanyin(){
 	cout<<endl;
 	slowPrint("我中間劇情還沒寫完(尖叫)",2); 
@@ -418,6 +369,7 @@ void character_Liuyiyi(){
 
 void dialogue(int character){
 	cout<<endl;
+	cout << "\033[2J\033[1;1H";
 	slowPrint("你正準備翻到下一頁查看結果，卻冷不防地——「咚！」",3);
 	slowPrint("一塊起司從書架上掉下來，直直砸在你頭上。",3); 
 	cout<<endl;
@@ -443,7 +395,7 @@ void ending(){
 	slowPrint("「完了！！！我明天要交的報告 還！ 沒！ 做！！！」",1);
 	cout<<endl;
 	slowPrint("你不管三七二十一急忙衝去抓起起司。",3);
-	slowPrint("途中你下意識地回過頭，與面前這位剛認識的陌生人對上眼。",3);
+	slowPrint("而後你下意識地回過頭，與面前這位剛認識的陌生人對上眼。",3);
 	cout<<endl;
 	slowPrint("你眨了眨眼，算是無聲的道別，因為下一刻你的意識便被突如其來的眩暈帶走。",3);
 	cout<<endl;
@@ -452,7 +404,7 @@ void ending(){
 	slowPrint("………",3);
 	cout<<endl;
 	slowPrint("當你再度醒來時，面前的景色變回你熟悉的圖書館，也沒看到奇怪的人影。",3);
-	slowPrint("你愣了一下，而後笑起來，決定把這段特別的經歷放在心裡，繼續未來的生活。",3);
+	slowPrint("你愣了一下，笑起來，決定把這段特別的經歷放在心裡，繼續未來的生活。",3);
 	cout<<endl;
 	slowPrint("〔The End〕",3);
 }
@@ -465,7 +417,7 @@ int main() {
     SetConsoleMode(hOut, dwMode);
     
     
-    opening();
+    //opening();
     library_map(2,0);
     dialogue(test_text());
     ending();
