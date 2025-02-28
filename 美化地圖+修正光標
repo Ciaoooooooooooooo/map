@@ -179,6 +179,10 @@ void library_map(int cur_r, int cur_c)
 {
     do {
        cout << "\033[2J\033[1;1H";
+       cout << "\n使用W/A/S/D控制方向"<<endl;
+			cout << "有黃色標記的位置似乎放了些神奇的東西，可以去看看！"<<endl; 
+			cout << "有紅色標記的地方似乎就是出口了！"<<endl;
+			cout << "\n\n\n";
         
         for (int i = 0; i < 5; ++i) {
             for (int j = 0; j < 10; ++j) {
@@ -191,7 +195,11 @@ void library_map(int cur_r, int cur_c)
 				{ 
                     cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
                 } 
-                
+                else if (i == 1 && j == 9) 
+				{ 
+                    cout << "\033[31m" << library[i][j] << "\033[0m" << " ";
+                } 
+
                 else cout<<library[i][j] << " ";
                 
             }
@@ -417,7 +425,7 @@ int main() {
     SetConsoleMode(hOut, dwMode);
     
     
-    //opening();
+    opening();
     library_map(2,0);
     dialogue(test_text());
     ending();
