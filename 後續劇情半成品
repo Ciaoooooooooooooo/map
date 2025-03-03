@@ -403,11 +403,24 @@ void character_Taro(){
 }
 void character_Siegfried(){
 	cout<<endl;
-	slowPrint("我中間劇情還沒寫完(尖叫)",2); 
-	slowPrint("等全部寫完我再一起放上來好了(陰暗地爬走)",2);  
+	slowPrint("「…你好？」",1);
+	slowPrint("「你好。」",2);
+	cout<<endl;
+	slowPrint("「呃…我可以問問你叫什麼名字嗎？」",1);
+	slowPrint("「齊格弗里德。」",2);
+	cout<<endl;
+	slowPrint("「喔喔，好的…」天啊這是甚麼絕對零度的環境，這天還要聊下去嗎！",1);
+	cout<<endl;
+	slowPrint("尖叫思考放棄一氣呵成，於是你破罐子摔碎的直接把問題砸給他。",3);
+	cout<<endl;
+	slowPrint("「你知道怎麼離開這裡嗎？」",1);
+	slowPrint("「嗯。」他眼神示意了起司的方向。",2);
+	cout<<endl;
+	slowPrint("不是哥們多說點話不會少塊肉吧？？",1);
+	slowPrint("算了，看在他都好好回答你問題的份上，就先不管吧。",3);
+
 }
 void character_Mina(){
-	cout<<endl;
 	//slowPrint("",3); 
 	//slowPrint("",3);  
 	cout<<endl;
@@ -425,14 +438,35 @@ void character_Mina(){
 }
 void character_Suoxiaohua(){
 	cout<<endl;
-	slowPrint("我中間劇情還沒寫完(尖叫)",2); 
-	slowPrint("等全部寫完我再一起放上來好了(陰暗地爬走)",2); 
+	slowPrint("「……你是誰？」",1);
+	slowPrint("「早安呀！我叫索曉樺～要來聽聽大唐最ㄅㄧㄤˋ的笑話嗎？」",2);
+	cout<<endl;
+	slowPrint("「呃，還是算了吧……」你現在沒什麼心情聽冷笑話。",1);
+	slowPrint("「好吧，如果你哪天閒閒沒事的時候歡迎來找我喔！」",2);
+	cout<<endl;
+	slowPrint("「喔…我知道了」",1);
+	slowPrint("你不是很擅長應付這種神經神經的人…幾經思考你還是躊躇著開口。",3);
+	cout<<endl;
+	slowPrint("「你知道要怎麼離開這裡嗎？」",1);
+	slowPrint("「知道啊，拿起那塊起司就可以嘍！不過你要小心，畢竟起司越多，起司越少嘛！哈哈哈～」",2);
+	slowPrint("「……」",1);
 }
 void character_Liuyiyi(){
 	cout<<endl;
-	slowPrint("我中間劇情還沒寫完(尖叫)",2); 
-	slowPrint("等全部寫完我再一起放上來好了(陰暗地爬走)",2); 
-}
+	slowPrint("「呃，你也是這個學校的嗎？」",1);
+	slowPrint("對方看起來有點內向，於是你試圖表現的很友善。",3);
+	cout<<endl;
+	slowPrint("「誒？喔…是的，我叫劉依依，是文藝部的部員。」",2);
+	slowPrint("「啊對，這裡是你們的社團場地呀。」",1);
+	cout<<endl;
+	slowPrint("「那你知道要怎麼離開這裡嗎？」",1);
+	slowPrint("「嗯…拿起那塊起司就好了。」",2);
+	cout<<endl;
+	slowPrint("「真的嗎！謝謝你！」",1);
+	slowPrint("你非常開心，彷彿剛看見五個起司雲在天上飛。",3);
+	cout<<endl;
+	slowPrint("心情不錯的你打算繼續開點話題。",3);
+} 
 
 void dialogue(int character){
 	cout<<endl;
