@@ -17,11 +17,11 @@ const map<int, string> colors = {
 
 string library[5][10]=
 	{	
-		{"書","☆","書","書","☆","書","書","書","  ","☆"},
-		{"☆","  ","  ","  ","  ","  ","  ","  ","  ","終"},
-		{"  ","  ","  ","☆","  ","  ","☆","  ","  ","書"},
-		{"  ","  ","  ","  ","  ","  ","  ","  ","☆","書"},
-		{"☆","書","書","書","書","☆","書","書","書","書"}
+		{"書","物","書","書","物","書","書","書","  ","物"},
+		{"物","  ","  ","  ","  ","  ","  ","  ","  ","終"},
+		{"  ","  ","  ","物","  ","  ","物","  ","  ","書"},
+		{"  ","  ","  ","  ","  ","  ","  ","  ","物","書"},
+		{"物","書","書","書","書","物","書","書","書","書"}
 	};
 	bool tool[5][10]=// 用來標記哪些格子是可以觸發故事的
  	{
@@ -186,7 +186,7 @@ void library_map(int cur_r, int cur_c)
     do {
        cout << "\033[2J\033[1;1H";
        cout << "\n使用W/A/S/D控制方向"<<endl;
-			cout << "有" << "\033[33m" << "黃色星星標記☆ "<< "\033[0m" << "的位置似乎放了些神奇的東西，可以去看看"<<endl; 
+			cout << "有" << "\033[33m" << "黃色標記"<< "\033[0m" << "的位置似乎放了些神奇的東西，可以去看看"<<endl; 
 			cout << "有" << "\033[31m" << "紅色標記"<< "\033[0m" << "的地方似乎就是出口了" <<endl;
 			cout << "小心不要撞到書架呦！"<<endl;
 			cout << "\n\n\n";
@@ -338,9 +338,6 @@ int test_text(){
 
 void character_Bech(){
 	cout<<endl;
-	//slowPrint("",3); 
-	//slowPrint("",3);  
-	cout<<endl;
 	slowPrint("「……你是誰？」",1);
 	slowPrint("「我叫貝赫，是這裡的管理員，很抱歉讓你捲入這樣的情況。」",2);
 	slowPrint("「你的名字真好聽！」聽到是管理員，你感覺自己離開這裡機會大幅提昇，於是你心情十分地好。",1);
@@ -354,12 +351,25 @@ void character_Bech(){
 }
 
 void character_Feichanyin(){
-
 	cout<<endl;
-	slowPrint("我中間劇情還沒寫完(尖叫)",2); 
-	slowPrint("等全部寫完我再一起放上來好了(陰暗地爬走)",2); 
-	
-	
+	slowPrint("「……你是誰？」",1);
+	slowPrint("「費禪因。」",2);
+	cout<<endl;
+	slowPrint("「喔喔！很高興認識你！」",1);
+	slowPrint("「你高興的太早了。」",2);
+	cout<<endl;
+	slowPrint("「……」",1);
+	slowPrint("呃，看起來還是挺和善禮貌的人……吧？",1);
+	slowPrint("你思索了一下，還是決定向他問問題。",3);
+	cout<<endl;
+	slowPrint("「呃，你知道怎麼離開這裡嗎？」",1);
+	slowPrint("「你猜啊。」",2);
+	cout<<endl;
+	slowPrint("……現在是腦筋急轉彎時間嗎？",1);
+	cout<<endl;
+	slowPrint("「你知道……？」",1);
+	slowPrint("「嗯哼。」他指了一下旁邊的起司。",2);
+	slowPrint("「啊……謝謝你！」",1);
 }
 void character_Roselyne(){
 	cout<<endl;
@@ -398,8 +408,13 @@ void character_Iris(){
 }
 void character_Taro(){
 	cout<<endl;
-	slowPrint("我中間劇情還沒寫完(尖叫)",2); 
-	slowPrint("等全部寫完我再一起放上來好了(陰暗地爬走)",2);  
+	slowPrint("「呃……你、你好？」",1);
+	slowPrint("「嗨！你好啊，我叫太郎！很高興認識你！」",2);
+	slowPrint("儘管對方面容和善，但給你一種冰冷的感覺……",3);
+	cout<<endl;
+	slowPrint("「想問一下，你知道怎麼離開這裡嗎？」你小心翼翼地開口。",1);
+	slowPrint("「喔！拿起那塊起司就可以了！」他給你一個大咧咧的笑容。",2);
+	slowPrint("「好的！謝謝你！」",1);
 }
 void character_Siegfried(){
 	cout<<endl;
@@ -421,17 +436,17 @@ void character_Siegfried(){
 
 }
 void character_Mina(){
-	//slowPrint("",3); 
-	//slowPrint("",3);  
 	cout<<endl;
 	slowPrint("「……你是誰？」",1);
 	slowPrint("「米娜。」她把玩著一隻金屬扳手，頭也不抬地回覆。",2);
+	cout<<endl;
 	slowPrint("「喔喔，那……起司去哪了？」",1);
 	slowPrint("「那邊喔。」",2);
 	slowPrint("你順著她的目光看去，一隻機械老鼠正躺在起司上。",3);
 	cout<<endl;
 	slowPrint("「……」",1);
 	slowPrint("你感覺她根本沒在認真回答，但還是嘗試著開口。",3);
+	cout<<endl;
 	slowPrint("「我……有辦法離開這裡嗎？」",1);
 	slowPrint("「那塊起司搞不好可以帶你走喔～」",2);
 	slowPrint("得到答案的你鬆了一口氣，回過神來又想問對方其他問題。",3); 
@@ -518,13 +533,11 @@ int main() {
     SetConsoleMode(hOut, dwMode);
     
     
-    opening();
-    library_map(2,0);
+    //opening();
+    //library_map(2,0);
     dialogue(test_text());
     ending();
     
     
     return 0;
 }
-//slowPrint("",3); 
-//cout<<""<<endl;
