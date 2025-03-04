@@ -221,7 +221,7 @@ void library_map(int cur_r, int cur_c)//傳入起始位置
 		slowPrint("……這樣看來，離開的希望大概是零了吧。",1);
 		slowPrint("無奈之下，你隨手翻起書架上的書，沒想到竟發現了一本相當奇怪的東西——",3);
 		cout << endl;
-		slowPrint("《心理測驗☆快來看看你跟起司的羈絆吧～？》",2);
+		slowPrint("《心理測驗☆ 快來看看你跟起司的羈絆吧～？》",2);
 		cout << endl;
 		slowPrint("……什麼鬼？這東西看起來比 FB 垃圾廣告還蠢。",1);
 		slowPrint("但現在也沒別的事可做，於是你帶著半信半疑的心情，開始讀起書中的內容。",3);
@@ -269,7 +269,7 @@ int psychologicaltest(){//回傳玩家選的角色
 			while(cin>>option){
 				if(option=='a'||option=='b'||option=='c'||option=='d'){
 				cout<<endl;
-				cout<< "\033[36m"<<"恭喜你獲得 "<<result[option-97]<<" 稱號！"<< "\033[0m"<<endl;;
+				cout<< "\033[33m"<<"恭喜你獲得 "<<result[option-97]<<" 稱號！"<< "\033[0m"<<endl;;
 				cout<<endl;
 				return (option-96);
 				}
@@ -287,7 +287,7 @@ int psychologicaltest(){//回傳玩家選的角色
 			while(cin>>option){
 				if(option=='a'||option=='b'){
 				cout<<endl;
-				cout<< "\033[36m"<<"恭喜你獲得 "<<result[option-93]<<" 稱號！"<< "\033[0m"<<endl;;
+				cout<< "\033[33m"<<"恭喜你獲得 "<<result[option-93]<<" 稱號！"<< "\033[0m"<<endl;;
 				cout<<endl;
 				return (option-92);
 				}
@@ -305,7 +305,7 @@ int psychologicaltest(){//回傳玩家選的角色
 			while(cin>>option){
 				if(option=='a'||option=='b'||option=='c'){
 				cout<<endl;
-				cout<< "\033[36m"<<"恭喜你獲得 "<<result[option-91]<<" 稱號！"<< "\033[0m"<<endl;;
+				cout<< "\033[33m"<<"恭喜你獲得 "<<result[option-91]<<" 稱號！"<< "\033[0m"<<endl;;
 				cout<<endl;
 				return (option-90);
 				}
