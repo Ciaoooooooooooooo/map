@@ -260,12 +260,13 @@ void library_map(int cur_r, int cur_c) {
 
 /*心理測驗內容，透過兩道選擇題決定玩家的後續遇到的角色
  * 
- *回傳值 - 玩家最後選擇的角色
+ *回傳值 - 玩家最後選擇的對應角色編號
  */ 
 
 int test_text(){
 	char option=0; // 用來儲存玩家的選擇
-	
+
+	//顯示第一題
 	cout << "\033[2J\033[1;1H"; 
 	slowPrint("「第一題！對於戀愛小說，你喜歡哪種類型？」",2); 
 	cout<<"a.當然是要甜甜的校園戀愛啊！"<<endl;
@@ -274,6 +275,7 @@ int test_text(){
 	while(cin>>option){
 		
 		if(option=='a'){
+			//清除畫面並顯示對應的第二題
 			cout << "\033[2J\033[1;1H";
 			slowPrint("「第二題！你覺得人生是由什麼組成的呢？」",2); 
 			cout<<"a.未知的意外。"<<endl;
@@ -284,19 +286,20 @@ int test_text(){
 			while(cin>>option){
 				if(option=='a'||option=='b'||option=='c'||option=='d'){
 				cout<<endl;
-				// 顯示稱號
+				// 根據玩家的選擇顯示對應稱號
 				cout<< "\033[33m"<<"恭喜你獲得 "<<result[option-97]<<" 稱號！"<< "\033[0m"<<endl;;
 				cout<<endl;
-				// 回傳對應的角色值
+				// 回傳對應的角色編號
 				return (option-96);
 				}
 				
-				// 若輸入非 a, b, c，則要求重新輸入
+				// 若輸入非 a, b, c，則提示玩家重新輸入選項
 				else{slowPrint("請輸入正確選項！！",4); }
 			}
 		}
 		
 		else if(option=='b'){
+			//清除畫面並顯示對應的第二題
 			cout << "\033[2J\033[1;1H";
 			slowPrint("「第二題！如果被丟到無人島上該怎麼辦呢？」",2); 
 			cout<<"a.確保衛生！"<<endl;
@@ -305,15 +308,19 @@ int test_text(){
 			while(cin>>option){
 				if(option=='a'||option=='b'){
 				cout<<endl;
+				// 根據玩家的選擇顯示對應稱號
 				cout<< "\033[33m"<<"恭喜你獲得 "<<result[option-93]<<" 稱號！"<< "\033[0m"<<endl;;
 				cout<<endl;
+				// 回傳對應的角色編號
 				return (option-92);
 				}
+				// 若輸入非 a, b, c，則提示玩家重新輸入選項
 				else{slowPrint("請輸入正確選項！！",4); }
 			}
 		}
 		
 		else if(option=='c'){
+			//清除畫面並顯示對應的第二題
 			cout << "\033[2J\033[1;1H";
 			slowPrint("「第二題！既然是自己一個人的話，那你喜歡什麼樣的生活呢？」",2); 
 			cout<<"a.刺激有趣的冒險！"<<endl;
@@ -323,14 +330,17 @@ int test_text(){
 			while(cin>>option){
 				if(option=='a'||option=='b'||option=='c'){
 				cout<<endl;
+				// 根據玩家的選擇顯示對應稱號
 				cout<< "\033[33m"<<"恭喜你獲得 "<<result[option-91]<<" 稱號！"<< "\033[0m"<<endl;;
 				cout<<endl;
+				// 回傳對應的角色編號
 				return (option-90);
 				}
+				// 若輸入非 a, b, c，則提示玩家重新輸入選項
 				else{slowPrint("請輸入正確選項！！",4); }
 			}
 		}
-		
+		// 若輸入非 a, b, c，則提示玩家重新輸入選項
 		else{slowPrint("請輸入正確選項！！",4); }
 		
 	}
@@ -339,7 +349,7 @@ int test_text(){
 
 /*心理測驗內容，提供重新測試的選項，若選擇重測便再呼叫test_text()的函式，直到玩家決定好測驗結果。 
  * 
- *回傳值 - 玩家最後選擇的角色
+ *回傳值 - 玩家最後選擇的對應角色編號
  */
  
 int psychologicaltest(){ 
