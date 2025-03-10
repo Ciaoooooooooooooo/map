@@ -56,20 +56,22 @@ const map<int, string> colors = {
  *	int color - 使用的顏色(顏色對應表在上方)
  */
 	 
-void slowPrint(const string& text,int color) {
-	 int charDelay=30;
-	 int lineDelay=1000;
-	cout << colors.at(color);
+void slowPrint(const string& text, int color) {
+	// 每個字元顯示及換行後的延遲時間（毫秒）
+    int charDelay = 30; 
+    int lineDelay = 1000; 
+    
+    cout << colors.at(color); // 設定顏色
     for (char c : text) {
-        cout << c << flush;
+        cout << c << flush; // 顯示字元，並立即輸出
         this_thread::sleep_for(chrono::milliseconds(charDelay)); // 逐字延遲
     }
     cout << endl;
     this_thread::sleep_for(chrono::milliseconds(lineDelay)); // 換行後的停頓
-    cout << colors.at(0);
+    cout << colors.at(0); // 重置顏色
 }
 
-/*根據角色的所在位置顯示對應的故事文本
+/*若角色位於特定位置則顯示對應的故事文本
  * 
  *參數：
  *	int a - 角色所在的縱座標 
@@ -147,53 +149,40 @@ void story(int a, int b )
  *	int cur_c - 角色所在的橫坐標 
  *	char c - 輸入的移動指令
  *	
- *回傳值 - 移動後的新位置
+ *回傳值 - 更新後的位置
  */ 
-int move_updown(int cur_r, int cur_c, char c) 
-{
-    switch (c) 
-    {
-    case 'w': case 'W': // 向上
-        
-            if (walk[cur_r-1][cur_c]&&cur_r-1>=0) {
-                
-                return (cur_r-1);
+int move_updown(int cur_r, int cur_c, char c) {
+    switch (c) {
+        case 'w': case 'W': // 向上移動
+            if (walk[cur_r-1][cur_c] && cur_r-1 >= 0) { // 確保不超出邊界且可行走
+                return (cur_r - 1);
             }
-        
-        break;
-    case 's': case 'S': // 向下
-       
-            if (walk[cur_r+1][cur_c]&&cur_r+1<5) {
-                
-                return (cur_r+1);
+            break;
+        case 's': case 'S': // 向下移動
+            if (walk[cur_r+1][cur_c] && cur_r+1 < 5) { // 確保不超出邊界且可行走
+                return (cur_r + 1);
             }
-        
-        break;
+            break;
     }
-    
- return cur_r;
+    return cur_r; // 若無法移動則維持原位置
 }
+    
 
-int move_rightleft(int cur_r, int cur_c, char c) 
-{
-    switch (c) 
-    {
-    case 'a': case 'A': // 向左
-     
-            if (walk[cur_r][cur_c-1]&&cur_c-1>=0) {
-                return (cur_c-1);
+
+int move_rightleft(int cur_r, int cur_c, char c) {
+    switch (c) {
+        case 'a': case 'A': // 向左移動
+            if (walk[cur_r][cur_c-1] && cur_c-1 >= 0) { // 確保不超出邊界且可行走
+                return (cur_c - 1);
             }
-        
-        break;
-    case 'd': case 'D': // 向右
-       
-            if (walk[cur_r][cur_c+1]&&cur_c+1<10) {
-                return (cur_c+1);
+            break;
+        case 'd': case 'D': // 向右移動
+            if (walk[cur_r][cur_c+1] && cur_c+1 < 10) { // 確保不超出邊界且可行走
+                return (cur_c + 1);
             }
-        
-        break;
+            break;
     }
-     return cur_c;
+    return cur_c; // 若無法移動則維持原位置
 }
 
 /*生成地圖，根據玩家輸入的移動指令呼叫相應函式
@@ -203,69 +192,70 @@ int move_rightleft(int cur_r, int cur_c, char c)
  *	int cur_c - 起始橫坐標
  */ 
 
-void library_map(int cur_r, int cur_c)
-{
+void library_map(int cur_r, int cur_c) {
     do {
-       cout << "\033[2J\033[1;1H";
-       cout << "\n使用W/A/S/D控制方向"<<endl;
-			cout << "有" << "\033[33m" << "黃色標記"<< "\033[0m" << "的位置似乎放了些神奇的東西，可以去看看"<<endl; 
-			cout << "有" << "\033[31m" << "紅色標記"<< "\033[0m" << "的地方似乎就是出口了" <<endl;
-			cout << "小心不要撞到書架呦！"<<endl;
-			cout << "\n\n\n";
+        cout << "\033[2J\033[1;1H"; // 清除畫面並移動到左上角
         
+        // 顯示地圖相關提示 
+        cout << "\n使用W/A/S/D控制方向" << endl;
+        cout << "有" << "\033[33m" << "黃色標記" << "\033[0m" << "的位置似乎放了些神奇的東西，可以去看看" << endl; 
+        cout << "有" << "\033[31m" << "紅色標記" << "\033[0m" << "的地方似乎就是出口了" << endl;
+        cout << "小心不要撞到書架呦！" << endl;
+        cout << "\n\n\n";
+        
+        // 繪製地圖
         for (int i = 0; i < 5; ++i) {
             for (int j = 0; j < 10; ++j) {
-                if (cur_r == i && cur_c == j) 
-				{ 
-                    cout << "\033[46;37m" << library[i][j] << "\033[0m" <<" ";
+                if (cur_r == i && cur_c == j) { // 顯示玩家當前位置
+                    cout << "\033[46;37m" << library[i][j] << "\033[0m" << " ";
                 } 
-                else if ((i == 0 && j == 1)||(i == 0 && j == 4)||(i == 0 && j == 9)|| (i == 1 && j == 0) ||(i == 2 && j == 3)  
-				||(i == 2 && j == 6)||(i == 3 && j == 8)||(i == 4 && j == 0) ||(i == 4 && j == 5)  ) 
-				{ 
+                else if ((i == 0 && j == 1) || (i == 0 && j == 4) || (i == 0 && j == 9) || 
+                         (i == 1 && j == 0) || (i == 2 && j == 3) || (i == 2 && j == 6) || 
+                         (i == 3 && j == 8) || (i == 4 && j == 0) || (i == 4 && j == 5)) {
+                    // 顯示黃色標記（有特殊物品的地方）
                     cout << "\033[33m" << library[i][j] << "\033[0m" << " ";
                 } 
-                else if (i == 1 && j == 9) 
-				{ 
+                else if (i == 1 && j == 9) {
+					 // 顯示紅色標記（出口）
                     cout << "\033[31m" << library[i][j] << "\033[0m" << " ";
                 } 
-
-                else cout<<library[i][j] << " ";
-                
+                else { // 顯示普通地圖元素
+                    cout << library[i][j] << " ";
+                }
             }
-            cout << endl;  
-        } 
+            cout << endl;
+        }
         
-	if(cur_r == 1 && cur_c == 9 )//終點劇情 
-	{
-		cout << "\n";
-		slowPrint("你印象中本該是出口的地方，卻只是一排與周圍毫無二致的巨大書櫃。",3);
-		slowPrint("……這樣看來，離開的希望大概是零了吧。",1);
-		slowPrint("無奈之下，你隨手翻起書架上的書，沒想到竟發現了一本相當奇怪的東西——",3);
-		cout << endl;
-		slowPrint("《心理測驗☆ 快來看看你跟起司的羈絆吧～？》",2);
-		cout << endl;
-		slowPrint("……什麼鬼？這東西看起來比 FB 垃圾廣告還蠢。",1);
-		slowPrint("但現在也沒別的事可做，於是你帶著半信半疑的心情，開始讀起書中的內容。",3);
-		break;
-	}
+        if (cur_r == 1 && cur_c == 9) { // 到達終點，觸發劇情，並結束迴圈
+            cout << "\n";
+            slowPrint("你印象中本該是出口的地方，卻只是一排與周圍毫無二致的巨大書櫃。", 3);
+            slowPrint("……這樣看來，離開的希望大概是零了吧。", 1);
+            slowPrint("無奈之下，你隨手翻起書架上的書，沒想到竟發現了一本相當奇怪的東西——", 3);
+            cout << endl;
+            slowPrint("《心理測驗☆ 快來看看你跟起司的羈絆吧～？》", 2);
+            cout << endl;
+            slowPrint("……什麼鬼？這東西看起來比 FB 垃圾廣告還蠢。", 1);
+            slowPrint("但現在也沒別的事可做，於是你帶著半信半疑的心情，開始讀起書中的內容。", 3);
+            break; 
+        }
         
-	story(cur_r, cur_c);
-
-    char move;
-    cin >> move;
-    
-    if (move == 'W' || move == 'w' || move == 'S' || move == 's') {
-           cur_r = move_updown(cur_r, cur_c, move);
+        story(cur_r, cur_c); //顯示額外劇情
+        
+        char move;
+        cin >> move; // 讓玩家輸入移動指令
+        
+        if (move == 'W' || move == 'w' || move == 'S' || move == 's') {
+            cur_r = move_updown(cur_r, cur_c, move); // 進行上下移動
         } 
-	else if (move == 'A' || move == 'a' || move == 'D' || move == 'd') {
-            cur_c=move_rightleft(cur_r, cur_c, move);
+        else if (move == 'A' || move == 'a' || move == 'D' || move == 'd') {
+            cur_c = move_rightleft(cur_r, cur_c, move); // 進行左右移動
         } 
-	else{
-            slowPrint("請輸入正確移動指令！！", 4);
+        else {
+            slowPrint("請輸入正確移動指令！！", 4); // 若輸入錯誤，提示玩家
             continue;
         }
-     
-    } while (true); 
+        
+    } while (true); // 讓玩家持續移動 (到達終點會中止迴圈) 
 }
 
 /*心理測驗內容，透過兩道選擇題決定玩家的後續遇到的角色
@@ -274,7 +264,7 @@ void library_map(int cur_r, int cur_c)
  */ 
 
 int test_text(){
-	char option=0;
+	char option=0; // 用來儲存玩家的選擇
 	
 	cout << "\033[2J\033[1;1H"; 
 	slowPrint("「第一題！對於戀愛小說，你喜歡哪種類型？」",2); 
@@ -294,11 +284,14 @@ int test_text(){
 			while(cin>>option){
 				if(option=='a'||option=='b'||option=='c'||option=='d'){
 				cout<<endl;
+				// 顯示稱號
 				cout<< "\033[33m"<<"恭喜你獲得 "<<result[option-97]<<" 稱號！"<< "\033[0m"<<endl;;
 				cout<<endl;
+				// 回傳對應的角色值
 				return (option-96);
 				}
-			
+				
+				// 若輸入非 a, b, c，則要求重新輸入
 				else{slowPrint("請輸入正確選項！！",4); }
 			}
 		}
@@ -353,11 +346,14 @@ int psychologicaltest(){
 	int character=0;
 	char user_continue;
 	do{
+		// 進行測驗，取得角色編號
    		character=test_text();
    	
     	slowPrint("「你決定好這就是你的起司了嗎？還是要再來一遍？」",2);
     	cout<<"a.決定好啦！"<<endl;
 		cout<<"b.還要再想想……"<<endl;
+		
+		//請玩家輸入是否要重新測驗 
     	while(cin>>user_continue){
 				if(user_continue=='a'){
 					slowPrint("「好耶！那我們來揭曉答案吧！」",2); 
@@ -369,12 +365,13 @@ int psychologicaltest(){
 				}
 				else{slowPrint("請輸入正確選項！！",4); }
 		}
-	}while(user_continue=='b');
+	}while(user_continue=='b');// 如果玩家選擇再試一次，則重新開始測驗
 	
-	return character;
+	return character;// 回傳角色編號
 }
 
-/*角色劇情*/ 
+
+/*各角色劇情*/ 
 
 void character_Bech(){
 	cout<<endl;
@@ -530,6 +527,8 @@ void character_Liuyiyi(){
  */ 
 
 void dialogue(int character){
+	
+	//銜接的劇情 
 	cout<<endl;
 	cout << "\033[2J\033[1;1H";
 	slowPrint("你正準備翻到下一頁查看結果，卻冷不防地——「咚！」",3);
@@ -538,6 +537,8 @@ void dialogue(int character){
 	slowPrint("「嘶……」",1); 
 	slowPrint("你忍不住倒吸一口氣，摸了摸頭，心想這下明天肯定會腫個包。",3); 
 	slowPrint("還沒來得及抱怨，當你再次抬起頭時，一位不知何時出現的陌生人站在你面前。",3); 
+	
+	// 根據角色編號，觸發不同角色的對話
 	if(character==1) character_Bech();
 	else if(character==2) character_Feichanyin();
 	else if(character==3) character_Roselyne();
@@ -551,8 +552,7 @@ void dialogue(int character){
 
 
 
-/*開頭與結尾劇情 */
-
+/*開頭劇情 */
 void opening(){
 	slowPrint("「頭好暈……怎麼回事？」",1);  
     slowPrint("你從昏迷中醒來，茫然地抬起頭。",3);
@@ -565,6 +565,7 @@ void opening(){
 }
 
 
+/*結尾劇情*/ 
 void ending(){
 	cout<<endl;
 	slowPrint("你思考著接下來要說甚麼，此時一個念頭劃過腦海。",3);
